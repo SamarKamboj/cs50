@@ -1,0 +1,11 @@
+sort1 uses: Bubble sort
+
+How do you know?: Since best case senerio or Big-Omega is less than Big-O (worst case senerio)
+
+sort2 uses: Merge Sort
+
+How do you know?: Big-O and Big-Omega is same and also least among all.
+
+sort3 uses: Selection Sort
+
+How do you know?: Big-O and Big-Omega is more than that of sort2

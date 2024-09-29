@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <form action="/" method="post">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" autocomplete="off" autofocus name="symbol" placeholder="Symbol" type="text">
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Add</button>
+        </div>
+    </form>
+
+    <!-- <div class="change-time"> -->
+    <div class="chart-container">
+        <ul class="list-inline">
+            <form action="/time" method="post">
+            {% for time in time_period %}
+                <li class="list-inline-item">
+                    <button type="submit" class="btn btn-light" name="time" value="{{ time }}">{{ time }}</button>
+                </li>
+            {% endfor %}
+            </form>
+        </ul>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        const ctx = document.getElementById('myChart').getContext("2d");
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ dates | safe }},
+                datasets: [
+                    {% for name, data in stocks.items() %}
+                    {
+                        label: "{{ name }}",
+                        data: {{ data["close"] | tojson }},
+                        borderColor: "{{ data['rgb'] }}",
+                        lineTension: 0.5,
+                    },
+                    {% endfor %}
+                ],
+            },
+            options: {
+                interaction: {
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: "right",
+                        display: true,
+                    },
+                    title: {
+                        display: true,
+                        text: "Stocks (HISTORICAL RECORDS ONLY)",
+                        font: {
+                            size: 25,
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+
+                    },
+                    x: {
+                        // display: false,
+                    }
+                },
+            }
+
+        });
+    </script>
+
+    <div class="remove-stock">
+        <form action="/remove" method="post">
+            <ul class="list-inline">
+                <li class="list-inline-item"><h5>Remove</h5></li>
+                {% for name in stocks %}
+                    <li class="list-inline-item">
+                        <button class="btn btn-danger" name="symbol" type="submit" value="{{ name }}">{{ name }}</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </form>
+    </div>
+{% endblock %}

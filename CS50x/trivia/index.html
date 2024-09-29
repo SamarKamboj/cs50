@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+            function check1(className)
+            {
+                var value = document.querySelector(className);
+                if (value.innerHTML == "2, 3, 4")
+                {
+                    value.style.backgroundColor = 'green';
+                }
+                else
+                {
+                    value.style.backgroundColor = 'red';
+                }
+            }
+
+            function check2()
+            {
+                var val = document.querySelector("input").value;
+                if (val == "282")
+                {
+                    document.querySelector(".bt5").style.backgroundColor = "green";
+                }
+                else
+                {
+                    document.querySelector(".bt5").style.backgroundColor = "red";
+                }
+
+            }
+
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                    <h3>If the sum of three numbers in an A.P. is 9 and their product is 24, then numbers are</h3>
+                    <div class="bt">
+                        <button class = "bt1", onclick="check1('.bt1');">2, 4, 6</button>
+                        <button class = "bt2", onclick="check1('.bt2');">1, 5, 3</button>
+                        <button class = "bt3", onclick="check1('.bt3');">2, 8, 4</button>
+                        <button class = "bt4", onclick="check1('.bt4');">2, 3, 4</button>
+                    </div>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>Find the sum of 12 terms of an A.P. whose nth term is given by "3n + 4"</h3>
+                <input type="text"/>
+                <button class="bt5" onclick="check2();" type="submit">Check Answer</button> <!--Answer: 262, 272, 282, 292-->
+            </div>
+        </div>
+    </body>
+</html>
